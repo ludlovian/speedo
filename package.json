@@ -1,0 +1,31 @@
+{
+  "name": "speedo",
+  "version": "0.1.0",
+  "description": "Speedo",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier-standard src/*.js",
+    "lint": "standard src/*.js | snazzy",
+    "build": "rollup -c rollup.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludlovian/speedo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ludlovian/speedo/issues"
+  },
+  "homepage": "https://github.com/ludlovian/speedo#readme",
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "prettier-standard": "^16.1.0",
+    "rollup": "^1.27.9",
+    "rollup-plugin-cleanup": "^3.1.1",
+    "rollup-plugin-terser": "^5.1.2",
+    "snazzy": "^8.0.0",
+    "standard": "^14.3.1"
+  }
+}
