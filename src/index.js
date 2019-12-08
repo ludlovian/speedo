@@ -9,12 +9,15 @@ export default class Speedo {
     this.readings = [[this.start, 0]]
   }
 
-  update (n) {
-    this.readings.push([Date.now(), n])
+  update (data) {
+    if (typeof data === 'number') data = { current: data }
+    const { current, total } = data
+    if (total) this.total = total
+    this.readings.push([Date.now(), current])
     if (this.readings.length > this.windowSize) {
       this.readings.splice(0, this.readings.length - this.windowSize)
     }
-    this.current = n
+    this.current = current
   }
 
   get done () {
@@ -22,7 +25,8 @@ export default class Speedo {
   }
 
   rate () {
-    if (this.readings.length < 2) return null
+    if (this.readings.length < 2) return 0
+    if (this.done) return this.current * 1e3 / this.taken
     const last = this.readings[this.readings.length - 1]
     const first = this.readings[0]
     return ((last[1] - first[1]) * 1e3) / (last[0] - first[0])
@@ -34,10 +38,9 @@ export default class Speedo {
   }
 
   eta () {
-    if (!this.total) return null
-    if (this.done) return 0
+    if (!this.total || this.done) return 0
     const rate = this.rate()
-    if (rate === null) return null
+    if (!rate) return 0
     return (1e3 * (this.total - this.current)) / rate
   }
 

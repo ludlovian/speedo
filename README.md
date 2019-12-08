@@ -19,7 +19,7 @@ Options:
 Set this to allow ETA measurements. Must be in the same *units* as `update`.
 
 ### .update
-`s.update(currentValue)`
+`.update(current | { current, total })`
 
 Provides a new reading in whatever *units* you like
 
