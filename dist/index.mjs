@@ -8,10 +8,9 @@ class Speedo {
     if (typeof data === 'number') data = { current: data };
     const { current, total } = data;
     if (total) this.total = total;
-    this.readings.push([Date.now(), current]);
-    if (this.readings.length > this.windowSize) {
-      this.readings.splice(0, this.readings.length - this.windowSize);
-    }
+    this.readings = [...this.readings, [Date.now(), current]].slice(
+      -this.windowSize
+    );
     this.current = current;
   }
   get done () {
