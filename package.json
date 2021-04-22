@@ -1,6 +1,6 @@
 {
   "name": "speedo",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "description": "Speedo",
   "main": "dist/index.js",
   "scripts": {
