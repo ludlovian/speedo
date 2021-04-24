@@ -39,6 +39,7 @@ export default class Speedo {
   eta () {
     if (!this.total || this.done) return 0
     const rate = this.rate()
+    /* c8 ignore next */
     if (!rate) return 0
     return (1e3 * (this.total - this.current)) / rate
   }
