@@ -3,42 +3,48 @@ Speed measurement
 
 ## API
 
-There is a single default export
+There are two exports - `speedo`, which is a simple calculator that you manually update.
 
-### Speedo
-`const s = new Speedo(opts)`
+`speedo/gen` is an aync-generator transform stream which updates automatically. This is the preferred option.
 
-creates a new speedo
+### Speedo/gen
+```
+import speedo from 'speedo/gen'
+const sp = speedo({opts})
 
-Options:
+await pipeline(..., sp, ...)
+```
+The only & default import is a function which creates a speedo transform stream. Options are:
 
-- `window` - how many measurements to measure the speed over. Default: 10
+- `total` - the expected size of the file
+- `interval` - how frequently should the speedo update
+- `windowSize` - how large a window to use to calculate average speeds
+
+
+### Attributes
+
+The speedo created has the following attributes:
+
+- `current` - how many bytes passed through so far
+- `total` - the total size
+- `percent` - percent complete (assuming `.total` was set)
+- `rate` - in bytes/second
+- `eta` - in ms
+- `done` - whether it is done yet
+
+### Old version
+
+The old version exports a class. Options on construction are
+
+- `window` - how many measurements to measure the speed over
 - `total` - sets the total expected
 
-### .total
-Set this to allow ETA measurements. Must be in the same *units* as `update`.
+And then you manually update with `.update(current)` or `.update({ current, total })`
 
-### .update
-`.update(current | { current, total })`
+The object then supports the following methods and attributes
 
-Provides a new reading in whatever *units* you like
-
-### .speed
-`r = s.speed()`
-
-Provides the average speed (in *units* per second) over the window. Or, if done, the total speed.
-
-### .taken
-`t = s.taken()`
-
-Returns how long the speedo has been running (in milliseconds)
-
-### .eta
-`e = s.eta()`
-
-Returns how long we have left (in milliseconds)
-
-### .done
-`if (s.done) ...`
-
-Says if the speedo is done (i.e. `current` >= `total`)
+- `total` - the total size
+- `speed()` - the average speed
+- `taken()` - time taken so far, or in total if done
+- `eta()` - eta in ms
+- `done` - if done

@@ -4,8 +4,11 @@
   "description": "Speedo",
   "main": "src/index.mjs",
   "module": "src/index.mjs",
-  "source": "src/index.mjs",
   "type": "module",
+  "exports": {
+      ".": "./src/index.mjs",
+      "./gen": "./src/gen.mjs"
+  },
   "scripts": {
     "format": "prettier-standard {src,test}/*.mjs",
     "clean": "rm -rf node_modules/.cache/ coverage/",
