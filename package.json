@@ -1,13 +1,13 @@
 {
   "name": "speedo",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "Speedo",
   "main": "src/index.mjs",
   "module": "src/index.mjs",
   "type": "module",
   "exports": {
-      ".": "./src/index.mjs",
-      "./gen": "./src/gen.mjs"
+    ".": "./src/index.mjs",
+    "./gen": "./src/gen.mjs"
   },
   "scripts": {
     "format": "prettier-standard {src,test}/*.mjs",
